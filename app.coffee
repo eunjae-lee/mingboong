@@ -1,5 +1,5 @@
 express = require 'express'
-routes = require './routes'
+routes = require './routes/index'
 http = require 'http'
 path = require 'path'
 
@@ -18,7 +18,9 @@ app.use express.static path.join __dirname, 'public_built'
 if app.get 'env' is 'development'
 	app.use express.errorHandler()
 
-app.get '/', routes.book
+app.get '/', routes.invitation
+app.get '/invitation', routes.invitation
+app.get '/book', routes.book
 
 http.createServer(app).listen app.get('port'), ->
 	console.log "Express server listening on port #{app.get('port')}"

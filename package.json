@@ -3,7 +3,7 @@
   "version": "0.0.1",
   "private": true,
   "scripts": {
-    "preinstall": "sudo npm install -g coffee-script grunt grunt-cli",
+    "preinstall": "sudo npm install -g coffee-script grunt grunt-cli forever",
     "start": "./start.sh"
   },
   "dependencies": {
