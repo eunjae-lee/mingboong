@@ -6,6 +6,8 @@ module.exports = (grunt) ->
 				max_line_length:
 					value: 120
 					level: "warn"
+				no_trailing_whitespace:
+					level: "warn"
 			app: ['public/coffeescripts/**/*.coffee']
 		coffee:
 			dev:
