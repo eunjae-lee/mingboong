@@ -23,7 +23,7 @@ $(document).ready ->
         <img data-xrange="40" data-yrange="0" class="piece piece-8" src="/images/pages/1-2/1-2-8.png" style="display: none; position: absolute;" />
         <img data-xrange="10" data-yrange="40" class="piece piece-9" src="/images/pages/1-2/1-2-9.png" style="display: none; position: absolute;" />
         <img data-xrange="5" data-yrange="20" class="piece piece-10" src="/images/pages/1-2/1-2-10.png" style="display: none; position: absolute;" />
-        <img data-xrange="10" data-yrange="10" class="piece piece-11" src="/images/pages/1-2/1-2-11.png" style="display: none; position: absolute;" />
+        <img data-xrange="0" data-yrange="10" class="piece piece-11" src="/images/pages/1-2/1-2-11.png" style="display: none; position: absolute;" />
       """
       keyUp:
         right: (currentSlide) ->
