@@ -1,2 +1,2 @@
-exports.index = (req, res) ->
-	res.render 'index'
+exports.book = (req, res) ->
+	res.render 'book'
