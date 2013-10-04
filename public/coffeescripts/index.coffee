@@ -1,4 +1,11 @@
 $(document).ready ->
+  setBodySize = ->
+    $(document.body).css
+      "width": $(window).width()
+      "height": $(window).height()
+  $(window).resize setBodySize
+  setBodySize()
+
   slides = [
     {
       background: "/images/pages/1-1.png"
