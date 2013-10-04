@@ -18,6 +18,7 @@
     "grunt-contrib-coffee": "*",
     "grunt-coffeelint": "*",
     "grunt-contrib-less": "*",
-    "grunt-contrib-watch": "*"
+    "grunt-contrib-watch": "*",
+    "grunt-contrib-copy": "*"
   }
 }

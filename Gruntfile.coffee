@@ -6,47 +6,51 @@ module.exports = (grunt) ->
 				max_line_length:
 					value: 120
 					level: "warn"
-			app: ['public_src/coffeescripts/**/*.coffee']
+			app: ['public/coffeescripts/**/*.coffee']
 		coffee:
 			dev:
 				options:
 					bare: true
 				files: [
 					expand: true
-					cwd: 'public_src/coffeescripts'
+					cwd: 'public/coffeescripts'
 					src: ['**/*.coffee']
-					dest: 'public/javascripts/'
+					dest: 'public_built/javascripts/'
 					ext: '.js'
 				]
-		uglify:
-			options:
-				banner: '/*! <%= pkg.name %> <%= grunt.template.today("yyyy-mm-dd") %> */\n'
-			build:
-				cwd: 'public/javascripts'
-				src: ['**/*.js']
-				dest: 'public/javascripts'
-				ext: '.min.js'
 		watch:
 			options:
 				livereload: true
 			coffee:
-				files: 'public_src/coffeescripts/**/*.coffee'
+				files: 'public/coffeescripts/**/*.coffee'
 				tasks: ['coffee:dev']
 			less:
-				files: 'public_src/less/**/*.less'
+				files: 'public/less/**/*.less'
 				tasks: ['less:dev']
 		less:
 			dev:
 				expand: true
-				cwd: 'public_src/less'
+				cwd: 'public/less'
 				src: ['**/*.less']
-				dest: 'public/stylesheets'
+				dest: 'public_built/stylesheets'
 				ext: '.css'
+		copy:
+			js:
+				cwd: 'public/javascripts/'
+				src: '**/*'
+				dest: 'public_built/javascripts'
+				expand: true
+			images:
+				cwd: 'public/images/'
+				src: '**/*'
+				dest: 'public_built/images'
+				expand: true
 
 	grunt.loadNpmTasks 'grunt-contrib-coffee'
 	grunt.loadNpmTasks 'grunt-contrib-uglify'
 	grunt.loadNpmTasks 'grunt-coffeelint'
 	grunt.loadNpmTasks 'grunt-contrib-watch'
 	grunt.loadNpmTasks 'grunt-contrib-less'
+	grunt.loadNpmTasks 'grunt-contrib-copy'
 
-	grunt.registerTask 'default', ['coffeelint', 'coffee:dev', 'less:dev']
+	grunt.registerTask 'default', ['coffeelint', 'coffee:dev', 'less:dev', 'copy:js', 'copy:images']
