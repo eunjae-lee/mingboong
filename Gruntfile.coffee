@@ -26,6 +26,15 @@ module.exports = (grunt) ->
 			coffee:
 				files: 'public/coffeescripts/**/*.coffee'
 				tasks: ['coffee:dev']
+			js:
+				files: 'public/javascripts/**/*.coffee'
+				tasks: ['copy:js']
+			images:
+				files: 'public/images/**/*'
+				tasks: ['copy:images']
+			views:
+				files: 'views/**/*'
+				tasks: ['default']
 			less:
 				files: 'public/less/**/*.less'
 				tasks: ['less:dev']
