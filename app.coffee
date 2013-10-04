@@ -15,6 +15,9 @@ app.use express.bodyParser()
 app.use express.methodOverride()
 app.use app.router
 app.use express.static path.join __dirname, 'public'
+app.use 'public/javascripts', express.static path.join __dirname, 'public/javascripts'
+app.use 'public/stylesheets', express.static path.join __dirname, 'public/stylesheets'
+app.use 'public/images', express.static path.join __dirname, 'public/images'
 
 if app.get 'env' is 'development'
 	app.use express.errorHandler()
