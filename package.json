@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "preinstall": "sudo npm install -g coffee-script grunt grunt-cli",
-    "start": "grunt; forever start -c coffee app.coffee"
+    "start": "./start.sh"
   },
   "dependencies": {
     "express": "3.4.0",
