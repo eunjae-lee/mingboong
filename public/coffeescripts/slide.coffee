@@ -5,7 +5,7 @@ class Slide
     @data = data
     this.init()
   init: ->
-    $(window).keyup (key) => 
+    $(window).keyup (key) =>
       result = this.handleKeyUp(key)
       return false
   handleKeyUp: (key) ->
