@@ -1,0 +1,22 @@
+{
+  "name": "mingseul",
+  "version": "0.0.1",
+  "private": true,
+  "scripts": {
+    "start": "grunt; coffee app.coffee"
+  },
+  "dependencies": {
+    "express": "3.4.0",
+    "jade": "*"
+  },
+  "devDependencies": {
+    "grunt": "*",
+    "grunt-contrib-jshint": "*",
+    "grunt-contrib-nodeunit": "*",
+    "grunt-contrib-uglify": "*",
+    "grunt-contrib-coffee": "*",
+    "grunt-coffeelint": "*",
+    "grunt-contrib-less": "*",
+    "grunt-contrib-watch": "*"
+  }
+}
