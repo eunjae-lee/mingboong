@@ -3,7 +3,9 @@
   "version": "0.0.1",
   "private": true,
   "scripts": {
-    "start": "grunt; coffee app.coffee"
+    "preinstall": "sudo npm install -g coffee-script grunt grunt-dev",
+    "start": "grunt; forever start -c coffee app.coffee",
+    "deploy": "ssh karis612@eunjae.net 'cd ~/service/mingboong/ ; git pull'"
   },
   "dependencies": {
     "express": "3.4.0",
