@@ -14,7 +14,10 @@ class Slide
         return true
       return this.gotoPrev()
     else if key.keyCode is 39 or key.keyCode is 32 # right or space
-      if @data[@currentIndex].keyUp and @data[@currentIndex].keyUp.right and @data[@currentIndex].keyUp.right(@currentSlide)
+      if @data[@currentIndex].fadeInImage and $(".fade_in_image", @currentSlide).css("display") is not "block"
+        $(".fade_in_image", @currentSlide).show()
+        return true
+      else if @data[@currentIndex].keyUp and @data[@currentIndex].keyUp.right and @data[@currentIndex].keyUp.right(@currentSlide)
         return true
       return this.gotoNext()
     return false
@@ -23,9 +26,13 @@ class Slide
     prevSlide = @currentSlide
     data = @data[index]
     data.innerHTML = "" unless data.innerHTML
-    @currentSlide = $("""<div class="slide slide-#{index}">#{data.innerHTML}</div>""")
+    data.fadeInImageHTML = data.fadeInImage = "" unless data.fadeInImage
+    if data.fadeInImage
+      data.fadeInImageHTML = """<img class="fade_in_image" src="#{data.fadeInImage}" style="display: none" />"""
+    @currentSlide = $("""<div class="slide slide-#{index}">#{data.fadeInImageHTML}#{data.innerHTML}</div>""")
     @currentSlide.css
       "background": "url(#{data.background}) no-repeat"
+      "background-size": "100%"
     @containerElem.append @currentSlide
     @currentIndex = index
     this.showSlideTransitionAnimation prevSlide, @currentSlide

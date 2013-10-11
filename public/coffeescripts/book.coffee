@@ -8,7 +8,12 @@ $(document).ready ->
 
   slides = [
     {
-      background: "/images/pages/1-1.png"
+      background: "/images/book/0102/image-04.png"
+      fadeInImage: "/images/book/0102/text-04.png"
+    }
+    {
+      background: "/images/book/0102/image-01.png"
+      fadeInImage: "/images/book/0102/text-01.png"
     }
     {
       background: "/images/pages/1-2.png"

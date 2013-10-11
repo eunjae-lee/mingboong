@@ -13,13 +13,9 @@ module.exports = (grunt) ->
 			dev:
 				options:
 					bare: true
-				files: [
-					expand: true
-					cwd: 'public/coffeescripts'
-					src: ['public/coffeescripts/**/*.coffee']
-					dest: 'public_built/javascripts/'
-					ext: '.js'
-				]
+				files:
+					'public_built/javascripts/slide.js': 'public/coffeescripts/slide.coffee'
+					'public_built/javascripts/book.js': 'public/coffeescripts/book.coffee'
 		watch:
 			options:
 				livereload: true
