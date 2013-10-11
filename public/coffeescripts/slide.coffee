@@ -1,20 +1,22 @@
 class Slide
-  constructor: (containerElem, data) ->
+  constructor: (options) ->
     @currentSlide = null
-    @containerElem = containerElem
-    @data = data
+    @containerElem = options.container
+    @data = options.slides
+    @slideWidth = options.slideWidth
     this.init()
   init: ->
     $(window).keyup (key) =>
       result = this.handleKeyUp(key)
       return false
+    @containerElem.addClass "slide_size_#{@slideWidth}"
   handleKeyUp: (key) ->
     if key.keyCode is 37 # left
       if @data[@currentIndex].keyUp and @data[@currentIndex].keyUp.left and @data[@currentIndex].keyUp.left(@currentSlide)
         return true
       return this.gotoPrev()
     else if key.keyCode is 39 or key.keyCode is 32 # right or space
-      if @data[@currentIndex].fadeInImage and $(".fade_in_image", @currentSlide).css("display") is not "block"
+      if @data[@currentIndex].fadeInImage and $(".fade_in_image", @currentSlide).css("display") is "none"
         $(".fade_in_image", @currentSlide).show()
         return true
       else if @data[@currentIndex].keyUp and @data[@currentIndex].keyUp.right and @data[@currentIndex].keyUp.right(@currentSlide)

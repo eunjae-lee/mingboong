@@ -3,16 +3,20 @@ body {
   margin: 0;
   position: relative;
   background: #222;
+  overflow: hidden;
 }
 
 #container {
-  width: 1024px;
-  height: 388px;
   left: 50%;
   top: 50%;
+  position: absolute;
+}
+
+#container.slide_size_1024 {
+  width: 1024px;
+  height: 388px;
   margin-left: -512px;
   margin-top: -194px;
-  position: absolute;
 }
 
 .slide {
@@ -21,7 +25,19 @@ body {
   position: absolute;
 }
 
-.slide-1 {
+.fade_in_image {
+  position: relative;
+}
+
+.slide-0 {
+  background-position-y: -389px !important;
+
+  .fade_in_image {
+    top: -268px;
+  }
+}
+
+.slide-2 {
   .piece-1 { left: 183px; top: 205px }
   .piece-2 { left: 338px; top: 67px }
   .piece-3 { left: 746px; top: 264px }

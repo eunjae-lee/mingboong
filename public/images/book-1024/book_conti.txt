@@ -1,0 +1,57 @@
+#01, #02/image-04.png
+#01, #02/image-01.png
+#01, #02/image-02.png
+#01, #02/image-03.png
+#03/image-01.png
+#03/image-03.png  // text-02 가 합쳐져서 먼저 보여지고, text-02 는 fadeout
+#03/image-04.png
+#03/image-05.png  // text-05 가 반복되서 흘러감
+#03/image-06.png
+#03/image-07.png
+#03/image-08.png
+#03/image-09.png
+#03/image-10.png
+#03/image-11.png
+#04/image-01.png
+#04/image-03.png  // text-02 가 합쳐져서 먼저 보여지고, text-02 는 fadeout
+#04/image-05.png
+#04/image-06.png
+
+#05/image-01.png
+#05/text-14.png // 빈 화면에
+// 중간에 흰 화면 잠시
+#05/text-15.png // 빈 화면에
+#05/image-02.png
+#05/image-03.png
+#05/image-04.png
+#05/image-05.png
+#05/image-06.png
+#05/image-07.png
+#05/text-08.png
+#05/image-12.png
+#05/image-13.png
+#05/image-10.png
+#05/image-11.png
+
+#06/image-01.png
+#06/image-02.png
+// 중간에 흰 화면 잠시
+#06/image-04.png
+#06/image-06.png  // text-05 가 겹쳐져서 나왔다가 text-05 는 fadeout
+#06/image-07.png
+#06/image-14.png
+#06/image-15.png
+#06/image-16.png
+#06/image-17.png
+#06/image-08.png
+#06/image-09.png
+#06/image-10.png
+#06/image-11.png
+#06/text-13.png 의 "얽매이게" 의 위 아래 잘린 모양만 나오다가 그 다음에 text-13.png 이 제대로 나옴
+
+#07/image-01.png
+#07/image-02.png
+#07/image-03.png
+#07/image-04.png
+#07/image-05.png
+#07/image-06.png 과 7을 나란히 붙임

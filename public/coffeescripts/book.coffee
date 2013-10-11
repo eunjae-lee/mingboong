@@ -1,4 +1,6 @@
 $(document).ready ->
+  slideSize = 1024
+
   setBodySize = ->
     $(document.body).css
       "width": $(window).width()
@@ -8,12 +10,12 @@ $(document).ready ->
 
   slides = [
     {
-      background: "/images/book/0102/image-04.png"
-      fadeInImage: "/images/book/0102/text-04.png"
+      background: "/images/book-#{slideSize}/0102/image-04.png"
+      fadeInImage: "/images/book-#{slideSize}/0102/text-04.png"
     }
     {
-      background: "/images/book/0102/image-01.png"
-      fadeInImage: "/images/book/0102/text-01.png"
+      background: "/images/book-#{slideSize}/0102/image-01.png"
+      fadeInImage: "/images/book-#{slideSize}/0102/text-01.png"
     }
     {
       background: "/images/pages/1-2.png"
@@ -43,5 +45,8 @@ $(document).ready ->
     }
   ]
   $.plax.enable()
-  slide = new Slide($("#container"), slides)
+  slide = new Slide
+    container: $("#container")
+    slides: slides
+    slideWidth: slideSize
   slide.show(0)
