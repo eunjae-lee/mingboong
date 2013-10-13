@@ -17,8 +17,21 @@ $(document).ready ->
 
   slides = [
     {
-      background: "/images/book-#{slideSize}/0102/image-04.png"
-      fadeInImage: "/images/book-#{slideSize}/0102/text-04.png"
+      background: ""
+      innerHTML: """
+        <div class="real_canvas" style="background: url(/images/book-#{slideSize}/0102/image-04.png) no-repeat; position: relative; top: -389px;">
+          <img src="/images/book-#{slideSize}/0102/text-04.png" />
+        </div>
+      """
+      keyUp:
+        right: (currentSlide) ->
+          unless currentSlide.doneMovingDown
+            currentSlide.doneMovingDown = true
+            $(".real_canvas", currentSlide).animate {
+              top: "-120px"
+            }, 2000
+            return true
+          return false
     }
     {
       background: "/images/book-#{slideSize}/0102/image-01.png"

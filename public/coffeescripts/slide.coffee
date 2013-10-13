@@ -1,3 +1,5 @@
+fadeInDuration = 300
+
 class Slide
   constructor: (options) ->
     @currentSlide = null
@@ -11,15 +13,15 @@ class Slide
       return false
     @containerElem.addClass "slide_size_#{@slideWidth}"
   doLeftAction: ->
-    if @data[@currentIndex].keyUp and @data[@currentIndex].keyUp.left
-      @data[@currentIndex].keyUp.left(@currentSlide)
+    if @data[@currentIndex].keyUp and @data[@currentIndex].keyUp.left and @data[@currentIndex].keyUp.left(@currentSlide)
+      return # because event is consumed
     else
       this.gotoPrevSlide()
   doRightAction: ->
     if @data[@currentIndex].fadeInImage and $(".fade_in_image", @currentSlide).css("display") is "none"
-      $(".fade_in_image", @currentSlide).show()
-    else if @data[@currentIndex].keyUp and @data[@currentIndex].keyUp.right
-      @data[@currentIndex].keyUp.right(@currentSlide)
+      $(".fade_in_image", @currentSlide).fadeIn fadeInDuration
+    else if @data[@currentIndex].keyUp and @data[@currentIndex].keyUp.right and @data[@currentIndex].keyUp.right(@currentSlide)
+      return # because event is consumed
     else
       this.gotoNextSlide()
   handleKeyUp: (key) ->
@@ -38,15 +40,16 @@ class Slide
     @currentSlide.css
       "background": "url(#{data.background}) no-repeat"
       "background-size": "100%"
+      "display": "none"
     @containerElem.append @currentSlide
     @currentIndex = index
     this.showSlideTransitionAnimation prevSlide, @currentSlide
     @currentSlide.ready => data.ready(@currentSlide) if data.ready and typeof data.ready is "function"
   showSlideTransitionAnimation: (prev, current) ->
     if prev
-      prev.fadeOut 100, ->
+      prev.fadeOut fadeInDuration, ->
         prev.remove()
-    current.fadeIn 100
+    current.fadeIn fadeInDuration
   gotoPrevSlide: ->
     if @currentIndex - 1 >= 0
       this.show @currentIndex - 1
