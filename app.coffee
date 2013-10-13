@@ -3,6 +3,16 @@ routes = require './routes/index'
 http = require 'http'
 path = require 'path'
 
+isBeforeExhibition = ->
+  cur = new Date()
+  year = 2013
+  month = 11
+  date = 13
+  return false if cur.getFullYear() > year
+  return false if cur.getMonth() + 1 > month
+  return false if cur.getDate() >= date
+  return true
+
 app = express()
 
 app.set 'port', 3123
@@ -18,7 +28,11 @@ app.use express.static path.join __dirname, 'public_built'
 if app.get 'env' is 'development'
 	app.use express.errorHandler()
 
-app.get '/', routes.invitation
+if isBeforeExhibition()
+  app.get '/', routes.invitation
+else
+  app.get '/', routes.book
+
 app.get '/invitation', routes.invitation
 app.get '/book', routes.book
 
