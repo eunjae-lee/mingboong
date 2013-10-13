@@ -28,10 +28,10 @@ app.use express.static path.join __dirname, 'public_built'
 if app.get 'env' is 'development'
 	app.use express.errorHandler()
 
-if isBeforeExhibition()
+#if isBeforeExhibition()
   app.get '/', routes.invitation
-else
-  app.get '/', routes.book
+#else
+#  app.get '/', routes.book
 
 app.get '/invitation', routes.invitation
 app.get '/book', routes.book
