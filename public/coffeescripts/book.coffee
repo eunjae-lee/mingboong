@@ -1,10 +1,17 @@
+setBodySize = ->
+  $(document.body).css
+    "width": $(window).width()
+    "height": $(window).height()
+
+getInitialSlideNum = ->
+  if location.hash.indexOf("#slide-") is 0
+    return location.hash.substr("#slide-".length) - 0
+  else
+    return 0
+
 $(document).ready ->
   slideSize = 1024
 
-  setBodySize = ->
-    $(document.body).css
-      "width": $(window).width()
-      "height": $(window).height()
   $(window).resize setBodySize
   setBodySize()
 
@@ -49,4 +56,7 @@ $(document).ready ->
     container: $("#container")
     slides: slides
     slideWidth: slideSize
-  slide.show(0)
+  slide.show(getInitialSlideNum())
+
+  $(".btn_left_arrow").click -> slide.doLeftAction() and false
+  $(".btn_right_arrow").click -> slide.doRightAction() and false

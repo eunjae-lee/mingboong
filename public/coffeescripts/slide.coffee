@@ -7,23 +7,26 @@ class Slide
     this.init()
   init: ->
     $(window).keyup (key) =>
-      result = this.handleKeyUp(key)
+      this.handleKeyUp(key)
       return false
     @containerElem.addClass "slide_size_#{@slideWidth}"
+  doLeftAction: ->
+    if @data[@currentIndex].keyUp and @data[@currentIndex].keyUp.left
+      @data[@currentIndex].keyUp.left(@currentSlide)
+    else
+      this.gotoPrevSlide()
+  doRightAction: ->
+    if @data[@currentIndex].fadeInImage and $(".fade_in_image", @currentSlide).css("display") is "none"
+      $(".fade_in_image", @currentSlide).show()
+    else if @data[@currentIndex].keyUp and @data[@currentIndex].keyUp.right
+      @data[@currentIndex].keyUp.right(@currentSlide)
+    else
+      this.gotoNextSlide()
   handleKeyUp: (key) ->
     if key.keyCode is 37 # left
-      if @data[@currentIndex].keyUp and @data[@currentIndex].keyUp.left and @data[@currentIndex].keyUp.left(@currentSlide)
-        return true
-      return this.gotoPrev()
+      this.doLeftAction()
     else if key.keyCode is 39 or key.keyCode is 32 # right or space
-      if @data[@currentIndex].fadeInImage and $(".fade_in_image", @currentSlide).css("display") is "none"
-        $(".fade_in_image", @currentSlide).show()
-        return true
-      else if @data[@currentIndex].keyUp and @data[@currentIndex].keyUp.right and @data[@currentIndex].keyUp.right(@currentSlide)
-        return true
-      return this.gotoNext()
-    return false
-  run: ->
+      this.doRightAction()
   show: (index) ->
     prevSlide = @currentSlide
     data = @data[index]
@@ -44,13 +47,13 @@ class Slide
       prev.fadeOut 100, ->
         prev.remove()
     current.fadeIn 100
-  gotoPrev: ->
+  gotoPrevSlide: ->
     if @currentIndex - 1 >= 0
       this.show @currentIndex - 1
       return true
     else
       return false
-  gotoNext: ->
+  gotoNextSlide: ->
     if @currentIndex + 1 < @data.length
       this.show @currentIndex + 1
       return true
