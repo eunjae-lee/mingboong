@@ -20,6 +20,8 @@ class Slide
   doRightAction: ->
     if @data[@currentIndex].fadeInImage and $(".fade_in_image", @currentSlide).css("display") is "none"
       $(".fade_in_image", @currentSlide).fadeIn fadeInDuration
+    else if @data[@currentIndex].fadeOutImage and $(".fade_out_image", @currentSlide).css("display") != "none"
+      $(".fade_out_image", @currentSlide).fadeOut fadeInDuration
     else if @data[@currentIndex].keyUp and @data[@currentIndex].keyUp.right and @data[@currentIndex].keyUp.right(@currentSlide)
       return # because event is consumed
     else
@@ -34,9 +36,12 @@ class Slide
     data = @data[index]
     data.innerHTML = "" unless data.innerHTML
     data.fadeInImageHTML = data.fadeInImage = "" unless data.fadeInImage
+    data.fadeOutImageHTML = data.fadeOutImage = "" unless data.fadeOutImage
     if data.fadeInImage
       data.fadeInImageHTML = """<img class="fade_in_image" src="#{data.fadeInImage}" style="display: none" />"""
-    @currentSlide = $("""<div class="slide slide-#{index}">#{data.fadeInImageHTML}#{data.innerHTML}</div>""")
+    if data.fadeOutImage
+      data.fadeOutImageHTML = """<img class="fade_out_image" src="#{data.fadeOutImage}" />"""
+    @currentSlide = $("""<div class="slide slide-#{index}">#{data.fadeInImageHTML}#{data.fadeOutImageHTML}#{data.innerHTML}</div>""")
     @currentSlide.css
       "background": "url(#{data.background}) no-repeat"
       "background-size": "100%"

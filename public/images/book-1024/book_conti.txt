@@ -12,6 +12,7 @@
 #03/image-09.png
 #03/image-10.png
 #03/image-11.png
+
 #04/image-01.png
 #04/image-03.png  // text-02 가 합쳐져서 먼저 보여지고, text-02 는 fadeout
 #04/image-05.png
