@@ -289,7 +289,25 @@ $(document).ready ->
       fadeInImage: "/images/book-#{slideSize}/07/text-05.png"
     }
     { #slide-53
-      background: "/images/book-#{slideSize}/07/image-06.png"
+      background: ""
+      innerHTML: """
+        <div class="wide_container" style="position: absolute;">
+          <img src="/images/book-#{slideSize}/07/image-06.png" style="float: left;" />
+          <img src="/images/book-#{slideSize}/07/image-07.png" style="float: left;" />
+        </div>
+      """
+      ready: (currentSlide) ->
+        ratio = slideSize / 1024
+        debugger
+        $(".wide_container", currentSlide).css "width", 2615*ratio
+      keyUp:
+        right: (currentSlide) ->
+          return false if currentSlide.doneMovingRight
+          currentSlide.doneMovingRight = true
+          ratio = slideSize / 1024
+          $(".wide_container", currentSlide).animate
+            left: -(2615*ratio - slideSize)
+          , 10000, "linear"
     }
   ]
   $.plax.enable()

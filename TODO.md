@@ -1,7 +1,7 @@
 # TODO
 ## book
-* add funtionalities to left, right arrow button
-** should be disappeared when not needed
+* arrow buttons should be disappeared when not needed
 * slide-47
-* slide-53
 * another slide size (2048?)
+* slide-2 : raining effect
+* show progress bar at the bottom line of canvas
