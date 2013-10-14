@@ -52,8 +52,9 @@ class Slide
     @currentSlide.ready => data.ready(@currentSlide) if data.ready and typeof data.ready is "function"
   showSlideTransitionAnimation: (prev, current) ->
     if prev
-      prev.fadeOut fadeInDuration, ->
+      setTimeout ->
         prev.remove()
+      , fadeInDuration
     current.fadeIn fadeInDuration
   gotoPrevSlide: ->
     if @currentIndex - 1 >= 0

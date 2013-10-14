@@ -10,7 +10,10 @@ getInitialSlideNum = ->
     return 0
 
 $(document).ready ->
-  slideSize = 1024
+  if $(window).width() >= 2048
+    slideSize = 2048
+  else
+    slideSize = 1024
 
   $(window).resize setBodySize
   setBodySize()
@@ -293,6 +296,7 @@ $(document).ready ->
       innerHTML: """
         <div class="wide_container" style="position: absolute;">
           <img src="/images/book-#{slideSize}/07/image-06.png" style="float: left;" />
+          <img class="text" src="/images/book-#{slideSize}/07/text-06.png" style="display: none; position: absolute; left: 0; top: 0;" />
           <img src="/images/book-#{slideSize}/07/image-07.png" style="float: left;" />
         </div>
       """
@@ -302,12 +306,20 @@ $(document).ready ->
         $(".wide_container", currentSlide).css "width", 2615*ratio
       keyUp:
         right: (currentSlide) ->
-          return false if currentSlide.doneMovingRight
-          currentSlide.doneMovingRight = true
-          ratio = slideSize / 1024
-          $(".wide_container", currentSlide).animate
-            left: -(2615*ratio - slideSize)
-          , 10000, "linear"
+          unless currentSlide.doneShowingText
+            currentSlide.doneShowingText = true
+            $(".text", currentSlide).fadeIn 300
+            return true
+
+          unless currentSlide.doneMovingRight
+            currentSlide.doneMovingRight = true
+            ratio = slideSize / 1024
+            $(".wide_container", currentSlide).animate
+              left: -(2615*ratio - slideSize)
+            , 10000, "linear"
+            return true
+
+          return false
     }
   ]
   $.plax.enable()
