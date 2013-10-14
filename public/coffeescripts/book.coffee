@@ -14,6 +14,7 @@ $(document).ready ->
     slideSize = 2048
   else
     slideSize = 1024
+  $("#progressBar").addClass "slide_size_#{slideSize}"
 
   $(window).resize setBodySize
   setBodySize()
@@ -302,7 +303,6 @@ $(document).ready ->
       """
       ready: (currentSlide) ->
         ratio = slideSize / 1024
-        debugger
         $(".wide_container", currentSlide).css "width", 2615*ratio
       keyUp:
         right: (currentSlide) ->
@@ -327,7 +327,11 @@ $(document).ready ->
     container: $("#container")
     slides: slides
     slideWidth: slideSize
-  slide.show(getInitialSlideNum())
+    showCallback: (currentIndex) ->
+      progressBarWidth = (currentIndex + 1)*slideSize / slides.length
+      $("#progressBar").width progressBarWidth
+  slide.show getInitialSlideNum()
+
 
   $(".btn_left_arrow").click -> slide.doLeftAction() and false
   $(".btn_right_arrow").click -> slide.doRightAction() and false

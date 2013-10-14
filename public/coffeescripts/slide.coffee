@@ -6,6 +6,7 @@ class Slide
     @containerElem = options.container
     @data = options.slides
     @slideWidth = options.slideWidth
+    @showCallback = options.showCallback or null
     this.init()
   init: ->
     $(window).keyup (key) =>
@@ -64,6 +65,7 @@ class Slide
         """
         @containerElem.append $(preparationHTML)
       , 1000
+    @showCallback(@currentIndex) if @showCallback
   showSlideTransitionAnimation: (prev, current) ->
     if prev
       setTimeout ->
