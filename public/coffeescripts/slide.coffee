@@ -49,7 +49,21 @@ class Slide
     @containerElem.append @currentSlide
     @currentIndex = index
     this.showSlideTransitionAnimation prevSlide, @currentSlide
-    @currentSlide.ready => data.ready(@currentSlide) if data.ready and typeof data.ready is "function"
+    @currentSlide.ready =>
+      $(".preparation", @containerElem).remove()
+      data.ready(@currentSlide) if data.ready and typeof data.ready is "function"
+      cachedCurrentIndex = @currentIndex
+      setTimeout =>
+        return if cachedCurrentIndex != @currentIndex
+        return unless @data[@currentIndex + 1]
+        nextData = @data[@currentIndex + 1]
+        preparationHTML = """
+          <img class="preparation" style="display: none; " src="#{nextData.background}" />
+          <img class="preparation" style="display: none; " src="#{nextData.fadeInImage}" />
+          <img class="preparation" style="display: none; " src="#{nextData.fadeOutImage}" />
+        """
+        @containerElem.append $(preparationHTML)
+      , 1000
   showSlideTransitionAnimation: (prev, current) ->
     if prev
       setTimeout ->
