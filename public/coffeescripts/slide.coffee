@@ -58,11 +58,11 @@ class Slide
         return if cachedCurrentIndex != @currentIndex
         return unless @data[@currentIndex + 1]
         nextData = @data[@currentIndex + 1]
-        preparationHTML = """
-          <img class="preparation" style="display: none; " src="#{nextData.background}" />
-          <img class="preparation" style="display: none; " src="#{nextData.fadeInImage}" />
-          <img class="preparation" style="display: none; " src="#{nextData.fadeOutImage}" />
-        """
+        preparationHTML = ""
+        preparationHTML += """<img class="preparation" style="display: none; " src="#{nextData.background}" />""" if nextData.background
+        preparationHTML += """<img class="preparation" style="display: none; " src="#{nextData.fadeInImage}" />""" if nextData.fadeInImage
+        preparationHTML += """<img class="preparation" style="display: none; " src="#{nextData.fadeOutImage}" />""" if nextData.fadeOutImage
+
         @containerElem.append $(preparationHTML)
       , 1000
     @showCallback(@currentIndex) if @showCallback

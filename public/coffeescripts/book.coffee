@@ -263,6 +263,7 @@ $(document).ready ->
     }
     { #slide-45
       background: "/images/book-#{slideSize}/06/image-10.png"
+      fadeInImage: "/images/book-#{slideSize}/06/text-10.png"
     }
     { #slide-46
       background: "/images/book-#{slideSize}/06/image-11.png"
@@ -330,6 +331,7 @@ $(document).ready ->
     showCallback: (currentIndex) ->
       progressBarWidth = (currentIndex + 1)*slideSize / slides.length
       $("#progressBar").width progressBarWidth
+      console.log "slide-#{currentIndex}"
   slide.show getInitialSlideNum()
 
 
