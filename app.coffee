@@ -29,7 +29,7 @@ if app.get 'env' is 'development'
 	app.use express.errorHandler()
 
 #if isBeforeExhibition()
-app.get '/', routes.invitation
+app.get '/', (req, res) -> res.redirect '/invitation'
 #else
 #  app.get '/', routes.book
 
