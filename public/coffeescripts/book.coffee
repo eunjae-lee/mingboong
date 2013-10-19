@@ -56,46 +56,63 @@ $(document).ready ->
       """
       ready: (currentSlide) ->
         data = [
-          [1, 10, 40, false, 129, 144]
-          [2, 40, 20, false, 233, 44]
-          [3, 20, 20, true, 258, 143]
-          [4, 20, 20, false, 509, 176]
-          [5, 20, 30, true, 582, 138]
-          [6, 20, 0, false, 659, 0]
-          [7, 20, 10, false, 662, 95]
-          [8, 10, 20, true, 650, 215]
-          [9, 20, 0, false, 789, 0]
-          [10, 20, 20, false, 739, 93]
-          [11, 10, 10, true, 797, 94]
-          [12, 5, 20, false, 846, 116]
-          [13, 0, 20, false, 1007, 216]
+          [1, 10, 40, false, 129, 144, 0.5]  # index, xrange, yrange, invert, left, top, tilt
+          [2, 40, 20, false, 233, 44, 0.5]
+          [3, 20, 20, true, 258, 143, 0.5217]
+          [4, 20, 20, false, 509, 176, 0.6095]
+          [5, 20, 30, true, 582, 138, 0.3781]
+          [6, 20, 0, false, 659, 0, 1.1276]
+          [7, 20, 10, false, 662, 95, 0.8846]
+          [8, 10, 20, true, 650, 215, 0.5937]
+          [9, 20, 0, false, 789, 0, 0.6666]
+          [10, 20, 20, false, 739, 93, 0.2878]
+          [11, 10, 10, true, 797, 94, 0.3291]
+          [12, 5, 20, false, 846, 116, 0.4444]
+          [13, 0, 20, false, 1007, 216, 0.6071]
         ]
         ratio = slideSize / 1024
         for datum in data
-          [index, xrange, yrange, invert, left, top] = datum
+          [index, xrange, yrange, invert, left, top, tilt] = datum
           elem = $(".piece-#{index}", currentSlide)
           elem.attr
             "data-xrange": xrange*ratio
             "data-yrange": yrange*ratio
             "data-invert": invert
+            "data-dest-left": left*ratio
+            "data-dest-top": top*ratio
           elem.css
-            "display": "none"
+            "display": "block"
             "position": "absolute"
-            "left": left*ratio
-            "top": top*ratio
+            "left": left*ratio + (top*ratio + 300)*tilt
+            "top": -300
       keyUp:
         right: (currentSlide) ->
-          pieces = $(".piece", currentSlide)
-          for _p in pieces
-            piece = $(_p)
-            unless "block" is piece.css "display"
-              piece.css "display", "block"
-              piece.plaxify()
-              return true
-          unless currentSlide.ignoredOnce
-            currentSlide.ignoredOnce = true
+          if currentSlide.animationStarted && !currentSlide.animationEnded
             return true
-          return false
+          if currentSlide.animationStarted && currentSlide.animationEnded
+            return false
+
+          currentSlide.animationStarted = true
+          currentSlide.animationEnded = false
+          indexToMove = 0
+          pieces = $(".piece", currentSlide)
+
+          intervalId = setInterval ->
+            if indexToMove < pieces.length && pieces[indexToMove]
+              piece = $(pieces[indexToMove])
+              piece.animate
+                left: piece.attr("data-dest-left")
+                top: piece.attr("data-dest-top")
+              , 800
+              setTimeout ->
+                piece.plaxify()
+              , 800
+              indexToMove += 1
+            else
+              clearInterval intervalId
+              currentSlide.animationEnded = true
+          , 1000
+          return true
     }
     { #slide-2
       background: "/images/book-#{slideSize}/0102/image-02.png"
