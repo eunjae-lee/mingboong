@@ -83,10 +83,65 @@ $(document).ready ->
           elem.css
             "display": "block"
             "position": "absolute"
-            "left": left*ratio + (top*ratio + 300)*tilt
-            "top": -300
+            "opacity": 0
+            "left": left*ratio + (top*ratio + 100*ratio)*tilt
+            "top": -100*ratio
       keyUp:
         right: (currentSlide) ->
+          return true if currentSlide.isAnimationRunning
+          currentSlide.nextGroupIndex = 0 unless currentSlide.nextGroupIndex
+          if currentSlide.nextGroupIndex > 3
+            unless currentSlide.ignoreOnce
+              currentSlide.ignoreOnce = true
+              return true
+            return false
+
+          data =
+            0:
+              0: [0, 800]
+              1: [600, 1000]
+              2: [1500, 900]
+            1:
+              3: [0, 900]
+            2:
+              4: [0, 1000]
+              5: [1000, 800]
+              6: [2000, 1000]
+              7: [2800, 1100]
+            3:
+              8: [0, 900]
+              9: [1200, 1200]
+              10: [2500, 1000]
+              11: [3400, 800]
+              12: [4000, 900]
+
+          maxDuration = 0
+          pieces = $(".piece", currentSlide)
+          datum = data[currentSlide.nextGroupIndex]
+          for index, info of datum
+            [delay, duration] = info
+            do (index, delay, duration) ->
+              setTimeout ->
+                piece = $(pieces[index])
+                console.log "piece", piece
+                piece.animate
+                  left: piece.attr("data-dest-left")
+                  top: piece.attr("data-dest-top")
+                  opacity: 1
+                , duration
+                setTimeout ->
+                  piece.plaxify()
+                , duration + 100
+              , delay
+            maxDuration = delay + duration if maxDuration < delay + duration
+
+          currentSlide.isAnimationRunning = true
+          setTimeout ->
+            currentSlide.isAnimationRunning = false
+          , maxDuration
+          currentSlide.nextGroupIndex += 1
+          return true
+        right2: (currentSlide) ->
           if currentSlide.animationStarted && !currentSlide.animationEnded
             return true
           if currentSlide.animationStarted && currentSlide.animationEnded
