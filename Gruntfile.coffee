@@ -10,12 +10,12 @@ module.exports = (grunt) ->
 					level: "warn"
 			app: ['public/coffeescripts/**/*.coffee']
 		coffee:
-			dev:
-				options:
-					bare: true
-				files:
-					'public_built/javascripts/slide.js': 'public/coffeescripts/slide.coffee'
-					'public_built/javascripts/book.js': 'public/coffeescripts/book.coffee'
+      dev:
+        expand: true
+        cwd: 'public/coffeescripts'
+        src: ['**/*.coffee']
+        dest: 'public_built/javascripts'
+        ext: '.js'
 		watch:
 			options:
 				livereload: true
