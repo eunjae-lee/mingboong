@@ -8,14 +8,19 @@ html
   body
     .bg
       .tv_area
-        p.name 류슬기, 정민지
-        p.title 졸업작품 전시회
-        p.date 11.13 ~ 11.19
+        p.name
+          span.txt(data-xrange=10, data-yrange=10) 류슬기, 정민지
+        p.title
+          span.txt(data-xrange=20, data-yrange=15, data-invert=true) 졸업작품 전시회
+        p.date
+          span.txt(data-xrange=5, data-yrange=5) 11.13 ~ 11.19
         p.location
           a(href="http://dmaps.kr/ggka")
-            인사동 화봉갤러리
+            span.txt(data-xrange=3, data-yrange=7, data-invert=true) 인사동 화봉갤러리
 
     script(src='http://www.parsecdn.com/js/parse-1.2.12.min.js')
+    script(src='/javascripts/jquery-2.0.3.min.js')
+    script(src='/javascripts/plax.js')
     script(src='/javascripts/invitation.js')
     script.
       (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
