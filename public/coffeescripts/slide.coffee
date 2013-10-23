@@ -84,3 +84,5 @@ class Slide
       return true
     else
       return false
+
+window.Slide = Slide
