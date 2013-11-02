@@ -54,120 +54,44 @@ $(document).ready ->
         <img class="piece piece-12" src="/images/book-#{slideSize}/0102/text-01/12.png" />
         <img class="piece piece-13" src="/images/book-#{slideSize}/0102/text-01/13.png" />
       """
-      ready: (currentSlide) ->
-        data = [
-          [1, 10, 40, false, 129, 144, 0.5]  # index, xrange, yrange, invert, left, top, tilt
-          [2, 40, 20, false, 233, 44, 0.5]
-          [3, 20, 20, true, 258, 143, 0.5217]
-          [4, 20, 20, false, 509, 176, 0.6095]
-          [5, 20, 30, true, 582, 138, 0.3781]
-          [6, 20, 0, false, 659, 0, 1.1276]
-          [7, 20, 10, false, 662, 95, 0.8846]
-          [8, 10, 20, true, 650, 215, 0.5937]
-          [9, 20, 0, false, 789, 0, 0.6666]
-          [10, 20, 20, false, 739, 93, 0.2878]
-          [11, 10, 10, true, 797, 94, 0.3291]
-          [12, 5, 20, false, 846, 116, 0.4444]
-          [13, 0, 20, false, 1007, 216, 0.6071]
-        ]
-        ratio = slideSize / 1024
-        for datum in data
-          [index, xrange, yrange, invert, left, top, tilt] = datum
-          elem = $(".piece-#{index}", currentSlide)
-          elem.attr
-            "data-xrange": xrange*ratio
-            "data-yrange": yrange*ratio
-            "data-invert": invert
-            "data-dest-left": left*ratio
-            "data-dest-top": top*ratio
-          elem.css
-            "display": "block"
-            "position": "absolute"
-            "opacity": 0
-            "left": left*ratio + (top*ratio + 100*ratio)*tilt
-            "top": -100*ratio
       keyUp:
         right: (currentSlide) ->
+          return false if currentSlide.isAnimationDone
           return true if currentSlide.isAnimationRunning
-          currentSlide.nextGroupIndex = 0 unless currentSlide.nextGroupIndex
-          if currentSlide.nextGroupIndex > 3
-            unless currentSlide.ignoreOnce
-              currentSlide.ignoreOnce = true
-              return true
-            return false
-
-          data =
-            0:
-              0: [0, 800]
-              1: [600, 1000]
-              2: [1500, 900]
-            1:
-              3: [0, 900]
-            2:
-              4: [0, 1000]
-              5: [1000, 800]
-              6: [2000, 1000]
-              7: [2800, 1100]
-            3:
-              8: [0, 900]
-              9: [1200, 1200]
-              10: [2500, 1000]
-              11: [3400, 800]
-              12: [4000, 900]
-
-          maxDuration = 0
-          pieces = $(".piece", currentSlide)
-          datum = data[currentSlide.nextGroupIndex]
-          for index, info of datum
-            [delay, duration] = info
-            do (index, delay, duration) ->
-              setTimeout ->
-                piece = $(pieces[index])
-                console.log "piece", piece
-                piece.animate
-                  left: piece.attr("data-dest-left")
-                  top: piece.attr("data-dest-top")
-                  opacity: 1
-                , duration
-                setTimeout ->
-                  piece.plaxify()
-                , duration + 100
-              , delay
-            maxDuration = delay + duration if maxDuration < delay + duration
-
+          
           currentSlide.isAnimationRunning = true
-          setTimeout ->
-            currentSlide.isAnimationRunning = false
-          , maxDuration
-          currentSlide.nextGroupIndex += 1
-          return true
-        right2: (currentSlide) ->
-          if currentSlide.animationStarted && !currentSlide.animationEnded
-            return true
-          if currentSlide.animationStarted && currentSlide.animationEnded
-            return false
+          ratio = slideSize / 1024
+          data = [
+            [1, 10, 40, false, 129, 144]  # index, xrange, yrange, invert, left, top
+            [2, 40, 20, false, 233, 44]
+            [3, 20, 20, true, 258, 143]
+            [4, 20, 20, false, 509, 176]
+            [5, 20, 30, true, 582, 138]
+            [6, 20, 0, false, 659, 0]
+            [7, 20, 10, false, 662, 95]
+            [8, 10, 20, true, 650, 215]
+            [9, 20, 0, false, 789, 0]
+            [10, 20, 20, false, 739, 93]
+            [11, 10, 10, true, 797, 94]
+            [12, 5, 20, false, 846, 116]
+            [13, 0, 20, false, 1007, 216]
+          ]
 
-          currentSlide.animationStarted = true
-          currentSlide.animationEnded = false
-          indexToMove = 0
-          pieces = $(".piece", currentSlide)
+          (showText = ->
+            if data.length is 0
+              currentSlide.isAnimationRunning = false
+              currentSlide.isAnimationDone = true
+              return
+            datum = data.shift()
+            [index, xrange, yrange, invert, left, top] = datum
 
-          intervalId = setInterval ->
-            if indexToMove < pieces.length && pieces[indexToMove]
-              piece = $(pieces[indexToMove])
-              piece.animate
-                left: piece.attr("data-dest-left")
-                top: piece.attr("data-dest-top")
-              , 800
-              setTimeout ->
-                piece.plaxify()
-              , 800
-              indexToMove += 1
-            else
-              clearInterval intervalId
-              currentSlide.animationEnded = true
-          , 1000
-          return true
+            elem = $(".piece-#{index}", currentSlide)
+            elem.css left: left*ratio, top: top*ratio
+            elem.attr "data-xrange": xrange*ratio, "data-yrange": yrange*ratio, "data-invert": invert
+            elem.animate {opacity: 1}, 950
+            elem.plaxify()
+            setTimeout showText, 1100
+          )()
     }
     { #slide-2
       background: "/images/book-#{slideSize}/0102/image-02.png"
