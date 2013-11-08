@@ -2,11 +2,42 @@ doctype 5
 html
   head
     title= "졸전 가계부"
-    link(rel='stylesheet', href='/stylesheets/book.css')
+    meta(charset='utf-8')
+    meta(name='viewport', content='width=device-width, initial-scale=1.0')
+    link(rel='stylesheet', href='/assets/bootstrap-3.0.0/css/bootstrap.min.css', media='screen')
+    link(rel='stylesheet', href='/stylesheets/money.css')
   body
-    #container
+    nav.navbar.navbar-default(role="navigation")
+      .navbar-header
+        a.navbar-brand(href="#") 졸전 가계부
+      .navbar-collapse
+        ul.nav.navbar-nav
+          li.active
+            a.menu_add(href="#") 추가
+          li
+            a.menu_list(href="#") 목록
+    .row
+      #container.col-md-4.col-md-offset-4.col-xs-6.col-xs-offset-6.col-sm-4.col-sm-offset-4
+        #add-wrapper
+          form(role="form")
+            .btn-group.btn-group-lg.btn-group-justified(data-toggle="buttons")
+              .label.btn.btn-primary.btn-seul
+                input(type="radio", name="options")
+                슬기
+              .label.btn.btn-primary.btn-ming
+                input(type="radio", name="options")
+                민지
+            .controls
+              input(type="number", class="money form-control", placeholder="얼마?")
+              input(type="text", class="memo form-control", placeholder="메모? (옵션)")
+              button(type="button", class="btn btn-success btn-lg btn-submit") 등록!
+
+        #list-wrapper
+          #expenses
+            h1 list
 
     script(src='/javascripts/jquery-2.0.3.min.js')
+    script(src='/assets/bootstrap-3.0.0/js/bootstrap.min.js')
     script(src='/javascripts/parse-1.2.12.min.js')
     script(src='/javascripts/money.js')
     script(type='text/javascript').

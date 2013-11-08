@@ -18,7 +18,7 @@ module.exports = (grunt) ->
         ext: '.js'
 		watch:
 			options:
-				livereload: true
+				livereload: false
 			coffee:
 				files: 'public/coffeescripts/**/*.coffee'
 				tasks: ['coffee:dev']
@@ -66,3 +66,4 @@ module.exports = (grunt) ->
 	grunt.loadNpmTasks 'grunt-contrib-copy'
 
 	grunt.registerTask 'default', ['coffeelint', 'coffee:dev', 'less:dev', 'copy:js', 'copy:assets', 'copy:images']
+	grunt.registerTask 'light', ['coffeelint', 'coffee:dev', 'less:dev', 'copy:js', 'copy:assets']
