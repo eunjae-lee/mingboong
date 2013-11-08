@@ -3,3 +3,9 @@ exports.invitation = (req, res) ->
 
 exports.book = (req, res) ->
 	res.render 'book'
+
+exports.money = (req, res) ->
+  res.render 'money'
+
+exports.login = (req, res) ->
+  res.render 'login'

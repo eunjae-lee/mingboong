@@ -47,6 +47,11 @@ module.exports = (grunt) ->
 				src: '**/*'
 				dest: 'public_built/javascripts'
 				expand: true
+			assets:
+				cwd: 'public/assets/'
+				src: '**/*'
+				dest: 'public_built/assets'
+				expand: true
 			images:
 				cwd: 'public/images/'
 				src: '**/*'
@@ -60,4 +65,4 @@ module.exports = (grunt) ->
 	grunt.loadNpmTasks 'grunt-contrib-less'
 	grunt.loadNpmTasks 'grunt-contrib-copy'
 
-	grunt.registerTask 'default', ['coffeelint', 'coffee:dev', 'less:dev', 'copy:js', 'copy:images']
+	grunt.registerTask 'default', ['coffeelint', 'coffee:dev', 'less:dev', 'copy:js', 'copy:assets', 'copy:images']
