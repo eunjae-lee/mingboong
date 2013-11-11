@@ -21,7 +21,6 @@ getImageRect = ->
 
 getImageUrl = (height) ->
   postfix = ""
-  alert window.devicePixelRatio
   if window.devicePixelRatio in [1.5, 2, 3]
     postfix = "x#{window.devicePixelRatio}"
   url = "/images/invitation/invitation-h#{height}#{postfix}.png"
