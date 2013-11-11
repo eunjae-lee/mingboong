@@ -35,6 +35,8 @@ app.get '/', (req, res) -> res.redirect '/invitation'
 
 app.get '/invitation', routes.invitation
 app.get '/book', routes.book
+app.get '/money', routes.money
+app.get '/login', routes.login
 
 http.createServer(app).listen app.get('port'), ->
 	console.log "Express server listening on port #{app.get('port')}"

@@ -1,4 +1,39 @@
-Parse.initialize "fSdERFQluFzvik1YswPuhPWowcxEehYjwp9zQfyK", "pSMZkzFIiu6MlQDBxt3XxFnDqrYeltwGf8J8tAa8"
+ratio = 6722 / 1300
+
+heights = [1300, 950, 640]
+
+getImageRect = ->
+  currentHeight = $(window).height()
+  imgHeight = heights[heights.length - 1]
+
+  for h in heights
+    if currentHeight >= h
+      imgHeight = h
+      break
+
+  imgWidth = ratio * imgHeight
+  rect =
+    top: (currentHeight - imgHeight) / 2
+    width: imgWidth
+    height: imgHeight
+  return rect
+
+getImageUrl = (height) ->
+  postfix = ""
+  if window.devicePixelRatio is 2
+    postfix = "x2"
+  url = "/images/invitation/invitation-h#{height}#{postfix}.png"
+
+showImage = ->
+  rect = getImageRect()
+  url = getImageUrl rect.height
+  $("#content").css
+    top: rect.top
+    width: rect.width
+    height: rect.height
+  $("#content").attr "src", url
+
+$(window).resize showImage
+
 $(document).ready ->
-  $.plax.enable()
-  $(".tv_area .txt").plaxify()
+  showImage()
