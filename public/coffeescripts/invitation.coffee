@@ -1,6 +1,7 @@
 ratio = 6722 / 1300
 
 heights = [1300, 950, 640]
+lastShowingHeight = null
 
 getImageRect = ->
   currentHeight = $(window).height()
@@ -26,6 +27,7 @@ getImageUrl = (height) ->
 
 showImage = ->
   rect = getImageRect()
+  return if lastShowingHeight == rect.height
   url = getImageUrl rect.height
   $("#content").css
     top: rect.top
