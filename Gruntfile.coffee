@@ -25,9 +25,9 @@ module.exports = (grunt) ->
 			js:
 				files: 'public/javascripts/**/*.coffee'
 				tasks: ['copy:js']
-			images:
-				files: 'public/images/**/*'
-				tasks: ['copy:images']
+			#images:
+			#	files: 'public/images/**/*'
+			#	tasks: ['copy:images']
 			views:
 				files: 'views/**/*'
 				tasks: ['default']
@@ -41,6 +41,14 @@ module.exports = (grunt) ->
 				src: ['**/*.less']
 				dest: 'public_built/stylesheets'
 				ext: '.css'
+		imagemin:
+			comp:
+				files: [{
+					expand: true
+					cwd: 'public/images/'
+					src: ['**/*.{png,jpg,jpeg,gif}']
+					dest: 'public_built/images'
+				}]
 		copy:
 			js:
 				cwd: 'public/javascripts/'
@@ -64,6 +72,7 @@ module.exports = (grunt) ->
 	grunt.loadNpmTasks 'grunt-contrib-watch'
 	grunt.loadNpmTasks 'grunt-contrib-less'
 	grunt.loadNpmTasks 'grunt-contrib-copy'
+	grunt.loadNpmTasks 'grunt-contrib-imagemin'
 
 	grunt.registerTask 'default', ['coffeelint', 'coffee:dev', 'less:dev', 'copy:js', 'copy:assets', 'copy:images']
 	grunt.registerTask 'light', ['coffeelint', 'coffee:dev', 'less:dev', 'copy:js', 'copy:assets']
