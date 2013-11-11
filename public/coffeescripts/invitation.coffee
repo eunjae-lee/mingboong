@@ -1,6 +1,6 @@
 ratio = 6722 / 1300
 
-heights = [1300, 950, 640]
+heights = [1300, 950, 640, 400]
 lastShowingHeight = null
 
 getImageRect = ->
@@ -21,8 +21,9 @@ getImageRect = ->
 
 getImageUrl = (height) ->
   postfix = ""
-  if window.devicePixelRatio is 2
-    postfix = "x2"
+  alert window.devicePixelRatio
+  if window.devicePixelRatio in [1.5, 2, 3]
+    postfix = "x#{window.devicePixelRatio}"
   url = "/images/invitation/invitation-h#{height}#{postfix}.png"
 
 showImage = ->
