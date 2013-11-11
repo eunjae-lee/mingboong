@@ -35,7 +35,17 @@ showImage = ->
     height: rect.height
   $("#content").attr "src", url
 
-$(window).resize showImage
+$(window).resize ->
+  height = $(window).height()
+  setTimeout ->
+    if height == $(window).height()
+      showImage()
+  , 200
+
+log = (msg) ->
+  if $("#log").length == 0
+    $(document.body).append $("<div id='log' style='position:absolute;top:0;left:0;'></div>")
+  $("#log").html msg
 
 $(document).ready ->
   showImage()
