@@ -16,6 +16,7 @@ getSlideSize = ->
   windowWidth = $(window).width()
   for size in slideSizes
     return size if windowWidth >= size
+  return slideSizes[slideSizes.length - 1]
 
 setProgressBarSize = (slideSize) ->
   $("#progressBar").removeClass "slide_size_#{size}" for size in slideSizes
