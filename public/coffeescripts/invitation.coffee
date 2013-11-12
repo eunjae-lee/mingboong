@@ -35,12 +35,14 @@ showImage = ->
     height: rect.height
   $("#content").attr "src", url
 
+###
 $(window).resize ->
   height = $(window).height()
   setTimeout ->
     if height == $(window).height()
       showImage()
   , 200
+###
 
 log = (msg) ->
   if $("#log").length == 0
