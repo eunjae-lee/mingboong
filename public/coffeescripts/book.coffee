@@ -336,7 +336,7 @@ showSlides = (options) ->
 
 changeSlideSizeIfNeed = ->
   newSlideSize = getSlideSize()
-  if slide.getSlideWith() != newSlideSize
+  if slide.getSlideWidth() != newSlideSize
     showSlides
       "slideSize": newSlideSize
       "initialSlideNum": slide.getCurrentIndex()
