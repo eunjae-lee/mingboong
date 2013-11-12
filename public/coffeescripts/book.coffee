@@ -1,3 +1,6 @@
+slide = null
+slideSizes = [2048, 1300, 1024]
+
 setBodySize = ->
   $(document.body).css
     "width": $(window).width()
@@ -9,20 +12,20 @@ getInitialSlideNum = ->
   else
     return 0
 
-$(document).ready ->
-  if $(window).width() >= 2048
-    slideSize = 2048
-  if $(window).width() >= 1300
-    slideSize = 1300
-  else
-    slideSize = 1024
-  ratio = slideSize / 1024
+getSlideSize = ->
+  windowWidth = $(window).width()
+  for size in slideSizes
+    return size if windowWidth >= size
 
+setProgressBarSize = (slideSize) ->
+  $("#progressBar").removeClass "slide_size_#{size}" for size in slideSizes
   $("#progressBar").addClass "slide_size_#{slideSize}"
 
-  $(window).resize setBodySize
-  setBodySize()
-
+showSlides = (options) ->
+  options = options or {}
+  slideSize = options.slideSize or getSlideSize()
+  setProgressBarSize slideSize
+  ratio = slideSize / 1024
   slides = [
     { #slide-0
       background: ""
@@ -329,8 +332,24 @@ $(document).ready ->
       progressBarWidth = (currentIndex + 1)*slideSize / slides.length
       $("#progressBar").width progressBarWidth
       console.log "slide-#{currentIndex}"
-  slide.show getInitialSlideNum()
+  slide.show options.initialSlideNum or getInitialSlideNum()
 
+changeSlideSizeIfNeed = ->
+  newSlideSize = getSlideSize()
+  if slide.getSlideWith() != newSlideSize
+    showSlides
+      "slideSize": newSlideSize
+      "initialSlideNum": slide.getCurrentIndex()
 
+bindEvents = ->
   $(".btn_left_arrow").click -> slide.doLeftAction() and false
   $(".btn_right_arrow").click -> slide.doRightAction() and false
+
+$(window).resize ->
+  setBodySize()
+  changeSlideSizeIfNeed()
+
+$(document).ready ->
+  setBodySize()
+  showSlides()
+  bindEvents()

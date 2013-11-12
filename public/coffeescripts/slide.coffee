@@ -84,5 +84,7 @@ class Slide
       return true
     else
       return false
+  getCurrentIndex: -> @currentIndex
+  getSlideWidth: -> @slideWidth
 
 window.Slide = Slide
