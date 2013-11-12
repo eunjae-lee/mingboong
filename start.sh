@@ -2,4 +2,4 @@
 
 grunt
 grunt watch &
-forever start -c coffee app.coffee
+forever --pidFile "${PWD}/app.pid" start -c coffee app.coffee
