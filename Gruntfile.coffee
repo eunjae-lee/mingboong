@@ -74,5 +74,5 @@ module.exports = (grunt) ->
 	grunt.loadNpmTasks 'grunt-contrib-copy'
 	grunt.loadNpmTasks 'grunt-contrib-imagemin'
 
-	grunt.registerTask 'default', ['coffeelint', 'coffee:dev', 'less:dev', 'copy:js', 'copy:assets', 'imagemin:comp']
-	grunt.registerTask 'quick', ['coffeelint', 'coffee:dev', 'less:dev', 'copy:js', 'copy:assets']
+	grunt.registerTask 'default', ['coffeelint', 'coffee:dev', 'less:dev', 'copy:js', 'copy:assets']
+	grunt.registerTask 'image', ['imagemin:comp']
