@@ -12,8 +12,12 @@ getInitialSlideNum = ->
 $(document).ready ->
   if $(window).width() >= 2048
     slideSize = 2048
+  if $(window).width() >= 1300
+    slideSize = 1300
   else
     slideSize = 1024
+  ratio = slideSize / 1024
+
   $("#progressBar").addClass "slide_size_#{slideSize}"
 
   $(window).resize setBodySize
@@ -23,7 +27,7 @@ $(document).ready ->
     { #slide-0
       background: ""
       innerHTML: """
-        <div class="real_canvas" style="background: url(/images/book-#{slideSize}/0102/image-04.png) no-repeat; position: relative; top: -389px;">
+        <div class="real_canvas" style="background: url(/images/book-#{slideSize}/0102/image-04.png) no-repeat; position: relative; ">
           <img src="/images/book-#{slideSize}/0102/text-04.png" />
         </div>
       """
@@ -32,7 +36,7 @@ $(document).ready ->
           unless currentSlide.doneMovingDown
             currentSlide.doneMovingDown = true
             $(".real_canvas", currentSlide).animate {
-              top: "-120px"
+              top: "#{-120*ratio}px"
             }, 2000
             return true
           return false
@@ -60,7 +64,6 @@ $(document).ready ->
           return true if currentSlide.isAnimationRunning
           
           currentSlide.isAnimationRunning = true
-          ratio = slideSize / 1024
           data = [
             [1, 10, 40, false, 129, 144]  # index, xrange, yrange, invert, left, top
             [2, 40, 20, false, 233, 44]
@@ -299,7 +302,6 @@ $(document).ready ->
         </div>
       """
       ready: (currentSlide) ->
-        ratio = slideSize / 1024
         $(".wide_container", currentSlide).css "width", 2615*ratio
       keyUp:
         right: (currentSlide) ->
@@ -310,7 +312,6 @@ $(document).ready ->
 
           unless currentSlide.doneMovingRight
             currentSlide.doneMovingRight = true
-            ratio = slideSize / 1024
             $(".wide_container", currentSlide).animate
               left: -(2615*ratio - slideSize)
             , 10000, "linear"
