@@ -49,6 +49,48 @@ module.exports = (grunt) ->
 					src: ['**/*.{png,jpg,jpeg,gif}']
 					dest: 'public_built/images'
 				}]
+			book1024:
+				files: [{
+					expand: true
+					cwd: 'public/images/book-1024/'
+					src: ['**/*.{png,jpg,jpeg,gif}']
+					dest: 'public_built/images/book-1024'
+				}]
+			book1300:
+				files: [{
+					expand: true
+					cwd: 'public/images/book-1300/'
+					src: ['**/*.{png,jpg,jpeg,gif}']
+					dest: 'public_built/images/book-1300'
+				}]
+			book1800:
+				files: [{
+					expand: true
+					cwd: 'public/images/book-1300/'
+					src: ['**/*.{png,jpg,jpeg,gif}']
+					dest: 'public_built/images/book-1800'
+				}]
+			book2048:
+				files: [{
+					expand: true
+					cwd: 'public/images/book-2048/'
+					src: ['**/*.{png,jpg,jpeg,gif}']
+					dest: 'public_built/images/book-2048'
+				}]
+			invitation:
+				files: [{
+					expand: true
+					cwd: 'public/images/invitation/'
+					src: ['**/*.{png,jpg,jpeg,gif}']
+					dest: 'public_built/images/invitation'
+				}]
+			root:
+				files: [{
+					expand: true
+					cwd: 'public/images/'
+					src: ['*.{png,jpg,jpeg,gif}']
+					dest: 'public_built/images'
+				}]
 		copy:
 			js:
 				cwd: 'public/javascripts/'
@@ -75,4 +117,11 @@ module.exports = (grunt) ->
 	grunt.loadNpmTasks 'grunt-contrib-imagemin'
 
 	grunt.registerTask 'default', ['coffeelint', 'coffee:dev', 'less:dev', 'copy:js', 'copy:assets']
-	grunt.registerTask 'image', ['imagemin:comp']
+	#grunt.registerTask 'image', ['imagemin:comp']
+	grunt.registerTask 'image-book1024', ['imagemin:book1024']
+	grunt.registerTask 'image-book1300', ['imagemin:book1300']
+	grunt.registerTask 'image-book1800', ['imagemin:book1800']
+	grunt.registerTask 'image-book2048', ['imagemin:book2048']
+	grunt.registerTask 'image-invitation', ['imagemin:invitation']
+	grunt.registerTask 'image-root', ['imagemin:root']
+	grunt.registerTask 'image', ['imagemin:book1024', 'imagemin:book1300', 'imagemin:book1800', 'imagemin:book2048', 'imagemin:invitation', 'imagemin:root']
