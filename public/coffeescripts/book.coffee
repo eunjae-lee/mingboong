@@ -1,5 +1,5 @@
 slide = null
-slideSizes = [2048, 1300, 1024]
+slideSizes = [2048, 1800, 1300, 1024]
 
 setBodySize = ->
   $(document.body).css
@@ -338,6 +338,8 @@ showSlides = (options) ->
 changeSlideSizeIfNeed = ->
   newSlideSize = getSlideSize()
   if slide.getSlideWidth() != newSlideSize
+    $("#container").html("")
+    $("#container").removeClass "slide_size_#{slide.getSlideWidth()}"
     showSlides
       "slideSize": newSlideSize
       "initialSlideNum": slide.getCurrentIndex()
