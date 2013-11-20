@@ -8,7 +8,7 @@ exports.book = (req, res) ->
 	res.render 'book'
 
 exports.money = (req, res) ->
-  res.render 'money'
+  res.send 404
 
 exports.login = (req, res) ->
   res.render 'login'
