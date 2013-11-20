@@ -9,7 +9,7 @@ class Slide
     @showCallback = options.showCallback or null
     this.init()
   init: ->
-    $(window).keyup (key) =>
+    $(document).keyup (key) =>
       this.handleKeyUp(key)
       return false
     @containerElem.addClass "slide_size_#{@slideWidth}"

@@ -93,7 +93,7 @@ showSlides = (options) ->
             [index, xrange, yrange, invert, left, top] = datum
 
             elem = $(".piece-#{index}", currentSlide)
-            elem.css left: left*ratio, top: top*ratio
+            elem.css left: left*ratio, top: top*ratio, display: "blocK"
             elem.attr "data-xrange": xrange*ratio, "data-yrange": yrange*ratio, "data-invert": invert
             elem.animate {opacity: 1}, 950
             elem.plaxify()
@@ -351,11 +351,20 @@ bindEvents = ->
     window.open "https://www.facebook.com/sharer/sharer.php?u=" + encodeURIComponent("http://mingboong.com/book"), "_blank", "width=626px,height=518px"
     return false
 
-$(window).resize ->
-  setBodySize()
-  changeSlideSizeIfNeed()
+isMobile = ->
+  ua = navigator.userAgent.toLowerCase()
+  return ua.indexOf("android") >= 0 or ua.indexOf("iphone") >= 0
 
-$(document).ready ->
-  setBodySize()
-  showSlides()
-  bindEvents()
+if isMobile()
+  alert "큰 컴퓨터 화면에서 감상 부탁드립니다. 죄송합니다 ^^"
+else
+  $(window).resize ->
+    setBodySize()
+    changeSlideSizeIfNeed()
+
+  $(document).ready ->
+    if $(window).width() < 1300
+      alert "좀 더 큰 화면에서 잘 보입니다.\n\n창 크기를 키워보세요!"
+    setBodySize()
+    showSlides()
+    bindEvents()
