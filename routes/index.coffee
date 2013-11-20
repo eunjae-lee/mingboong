@@ -1,3 +1,6 @@
+exports.index = (req, res) ->
+  res.render 'index'
+
 exports.invitation = (req, res) ->
   res.render 'invitation'
 
