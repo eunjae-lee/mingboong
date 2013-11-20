@@ -66,7 +66,7 @@ module.exports = (grunt) ->
 			book1800:
 				files: [{
 					expand: true
-					cwd: 'public/images/book-1300/'
+					cwd: 'public/images/book-1800/'
 					src: ['**/*.{png,jpg,jpeg,gif}']
 					dest: 'public_built/images/book-1800'
 				}]
