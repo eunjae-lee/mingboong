@@ -2,6 +2,10 @@ doctype 5
 html
   head
     title= "Story Book"
+    meta(charset='utf-8')
+    meta(property='og:image', content='http://mingboong.com/images/index/preview.png')
+    meta(property='og:title', content='류슬기, 정민지 - 졸업전시회 11/14 ~ 11/19 (수원대학교 커뮤니케이션 디자인과)')
+    meta(property='og:url', content='http://mingboong.com/book')
     link(rel='stylesheet', href='/stylesheets/book.css')
   body
     #container
@@ -9,6 +13,8 @@ html
 
     a(class='btn_left_arrow btn_arrow', href='#'): Prev
     a(class='btn_right_arrow btn_arrow', href='#'): Next
+
+    a(class='btn_facebook', href='#'): Facebook
 
     script(src='/javascripts/jquery-2.0.3.min.js')
     script(src='/javascripts/plax.js')
