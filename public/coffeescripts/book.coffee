@@ -349,6 +349,7 @@ bindEvents = ->
   $(".btn_right_arrow").click -> slide.doRightAction() and false
   $(".btn_facebook").click ->
     window.open "https://www.facebook.com/sharer/sharer.php?u=" + encodeURIComponent("http://mingboong.com/book"), "_blank", "width=626px,height=518px"
+    return false
 
 $(window).resize ->
   setBodySize()
