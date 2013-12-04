@@ -356,7 +356,8 @@ isMobile = ->
   return ua.indexOf("android") >= 0 or ua.indexOf("iphone") >= 0
 
 if isMobile()
-  alert "큰 컴퓨터 화면에서 감상 부탁드립니다. 죄송합니다 ^^"
+  alert "큰 컴퓨터 화면에서 감상 부탁드립니다. 죄송합니다 ^^\n\n소개 페이지로 이동할게요"
+  location.href = "/invitation"
 else
   $(window).resize ->
     setBodySize()
