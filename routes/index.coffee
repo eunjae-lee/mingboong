@@ -1,5 +1,5 @@
 exports.index = (req, res) ->
-  res.render 'index'
+  res.redirect '/book'
 
 exports.invitation = (req, res) ->
   res.render 'invitation'
